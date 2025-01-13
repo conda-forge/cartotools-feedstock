@@ -5,20 +5,20 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/c/cartotools/cartotools-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/c/cartotools/cartotools-{{ version }}.tar.gz
   sha256: 28d75bdbf29fd6e17e09313396b5b4af8d4d8ba875a974925eea6c44e5ce426f
 
 build:
   noarch: python
-  number: 0
+  number: 1
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - numpy >=1.18
     - pandas
     - pillow
@@ -29,6 +29,8 @@ requirements:
     - appdirs
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - cartotools
 
